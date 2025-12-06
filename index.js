@@ -74,6 +74,13 @@ async function run() {
       });
     });
 
+    app.post('/orders',async(req,res)=>{
+  const data=req.body
+  const result=await ordercollection.insertOne(data)
+  res.status(201).send(result)
+
+})
+
     // Test ping
     await client.db("admin").command({ ping: 1 });
     console.log("MongoDB connected ✔");
