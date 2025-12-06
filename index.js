@@ -38,6 +38,14 @@ async function run() {
     });
 
 
+    
+    app.get("/model/:id", async (req, res) => {
+      const id = req.params.id;
+      const model = await modelsCollection.findOne({ _id: new ObjectId(id) });
+      res.send(model);
+    });
+
+
 
     // Test ping
     await client.db("admin").command({ ping: 1 });
