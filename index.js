@@ -32,7 +32,10 @@ async function run() {
       const result = await modelsCollection.insertOne(model);
       res.send({ success: true, insertedId: result.insertedId });
     });
-
+  app.get("/model", async (req, res) => {
+      const result = await modelsCollection.find({}).toArray();
+      res.send(result);
+    });
 
 
 
