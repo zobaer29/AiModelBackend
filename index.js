@@ -81,6 +81,16 @@ async function run() {
 
 })
 
+app.get("/orders", async (req, res) => {
+  try {
+    const result = await ordercollection.find({}).toArray();
+    res.status(200).send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Something went wrong" });
+  }
+});
+
     // Test ping
     await client.db("admin").command({ ping: 1 });
     console.log("MongoDB connected ✔");
