@@ -46,6 +46,12 @@ async function run() {
     });
 
 
+     app.get("/mymodel", async (req, res) => {
+      const { createdBy } = req.query;
+      const query = createdBy ? { createdBy: createdBy } : {};
+      const result = await modelsCollection.find(query).toArray();
+      res.send(result);
+    });
 
     // Test ping
     await client.db("admin").command({ ping: 1 });
