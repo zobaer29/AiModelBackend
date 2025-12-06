@@ -59,6 +59,21 @@ async function run() {
       res.send(result);
     });
 
+      app.put("/update/:id", async (req, res) => {
+      const data = req.body;
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const updatemodel = {
+        $set: data
+      };
+      const result = await modelsCollection.updateOne(query, updatemodel);
+      res.send({
+        success: true,
+        message: "Model updated successfully",
+        result
+      });
+    });
+
     // Test ping
     await client.db("admin").command({ ping: 1 });
     console.log("MongoDB connected ✔");
